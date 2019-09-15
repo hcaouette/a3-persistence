@@ -1,11 +1,12 @@
 const express   = require( 'express' ),
       app       = express(),
-      cookiePaser = require( 'cookie-parser')
-      cookieSession   = require( 'cookie-session' ),
-      session   = require( 'express-session' ),
-      passport  = require( 'passport' ),
-      Local     = require( 'passport-local' ).Strategy,
-      bodyParser= require( 'body-parser' )
+      session   = require( 'express-session' ),           //1
+      passport  = require( 'passport' ),                  //2
+      local     = require( 'passport-local' ).Strategy,
+      GoogleStrategy = require('passport-google-oauth').OAuth2Strategy; //4
+      bodyParser= require( 'body-parser' ),               //3
+      favicon   = require( 'serve-favicon' ),
+      path      = require( 'path' ),
       port = 3000
 
 app.use(express.static('public'))
@@ -13,6 +14,20 @@ app.use(bodyParser.json())
 app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
+passport.use(new GoogleStrategy({
+    clientID: '443479129403-kgnq88arlnldecfi9qp87queha2fhl7r.apps.googleusercontent.com',
+    clientSecret: 'RIPOr3cA2Vwyd00UiMNoxNfK',
+    callbackURL: "http://www.example.com/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+       User.findOrCreate({ googleId: profile.id }, function (err, user) {
+         return done(err, user);
+       });
+  }
+));
+// passport.use( new Local( myLocalStrategy ) )
+passport.initialize()
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 // a simple table to store non-persistent data. for assignment #3
 // your data must be persistent between sessions using a database (lowdb)
@@ -27,12 +42,19 @@ app.get('/cheeses.html', (req, res) => res.sendFile(public/cheeses.html))
 app.get('/about.html', (req, res) => res.sendFile(public/about.html))
 app.get('/cart.html', (req, res) => res.sendFile(public/cart.html))
 app.get('/login.html', (req, res) => res.sendFile(public/login.html))
+app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }))
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 //catches request to '/login' from client
-app.post('/login', passport.authenticate( 'local' ), function( req, res ) {
-  console.log( 'user:', req.user )
-  res.json({ status:true })
-})
+// app.post('/login', passport.authenticate( 'local' ), function( req, res ) {
+//   console.log( 'user:', req.user )
+//
+//   res.json({ status:true })
+// })
 //catches request to '/test' from client
 app.post('/test', function( req, res ) {
   console.log( 'authenticate with cookie?', req.user )
@@ -68,17 +90,12 @@ const myLocalStrategy = function( username, password, done ) {
   }
 }
 //end myLocalStrategy func
-passport.use( new Local( myLocalStrategy ) )
-passport.initialize()
-
-
 passport.serializeUser( ( user, done ) => done( null, user.username ) )
 // "name" below refers to whatever piece of info is serialized in seralizeUser,
 // in this example we're using the username
 passport.deserializeUser( ( username, done ) => {
   const user = users.find( u => u.username === username )
   console.log( 'deserializing:', name )
-
   if( user !== undefined ) {
     done( null, user )
   }else{
@@ -87,4 +104,4 @@ passport.deserializeUser( ( username, done ) => {
 })
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`a3-hcaouette listening on port ${port}!`))
