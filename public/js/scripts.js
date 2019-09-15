@@ -1,6 +1,16 @@
 // Add some Javascript code here, to run on the front end.
 
-console.log("Welcome to assignment 2!")
+console.log("Welcome to assignment 3!")
+
+const login = function(){
+  fetch( '/login', {
+      method:'POST',
+      body:JSON.stringify({ username:'hc', password:'hc1' }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then( res => res.json() )
+    .then( console.log )
+}
 
 const submit = function( e ) {
   // prevent default form action from being carried out
