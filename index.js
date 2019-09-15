@@ -1,7 +1,7 @@
 const express   = require( 'express' ),
       app       = express(),
-      cookPaser = require( 'cookie-parser')
-      session   = require( 'cookie-session' ),
+      cookiePaser = require( 'cookie-parser')
+      cookieSession   = require( 'cookie-session' ),
       passport  = require( 'passport' ),
       Local     = require( 'passport-local' ).Strategy,
       bodyParser= require( 'body-parser' )
@@ -9,6 +9,9 @@ const express   = require( 'express' ),
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
+app.use( cookieSession({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
+app.use( passport.initialize() )
+app.use( passport.session() )
 
 //redirects
 app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
@@ -20,8 +23,8 @@ app.get('/login.html', (req, res) => res.sendFile(public/login.html))
 // a simple table to store non-persistent data. for assignment #3
 // your data must be persistent between sessions using a database (lowdb)
 const users = [
-  { username:'charlie', password:'charliee' },
-  { username:'bill',    password:'billl' }
+  { username:'hc', password:'hc1' },
+  { username:'user', password:'userpass' }
 ]
 
 // all authentication requests in passwords assume that your client
@@ -51,17 +54,35 @@ const myLocalStrategy = function( username, password, done ) {
   }
 }
 
+
+
 passport.use( new Local( myLocalStrategy ) )
 passport.initialize()
 
-app.post(
-  '/login',
-  passport.authenticate( 'local' ),
-  function( req, res ) {
+app.post('/login', passport.authenticate( 'local' ), function( req, res ) {
     console.log( 'user:', req.user )
     res.json({ status:true })
   }
 )
+
+passport.serializeUser( ( user, done ) => done( null, user.username ) )
+// "name" below refers to whatever piece of info is serialized in seralizeUser,
+// in this example we're using the username
+passport.deserializeUser( ( username, done ) => {
+  const user = users.find( u => u.username === username )
+  console.log( 'deserializing:', name )
+
+  if( user !== undefined ) {
+    done( null, user )
+  }else{
+    done( null, false, { message:'user not found; session not restored' })
+  }
+})
+
+app.post('/test', function( req, res ) {
+  console.log( 'authenticate with cookie?', req.user )
+  res.json({ status:'success' })
+})
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
