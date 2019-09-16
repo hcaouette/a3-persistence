@@ -26,9 +26,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "https://a3-hcaouette.glitch.me/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-       // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-         return done(null, profile);
-       // });
+   return done(null, profile);
   }
 ));
 passport.initialize()
@@ -42,22 +40,27 @@ app.get('/about.html', (req, res) => res.sendFile(public/about.html))
 app.get('/cart.html', (req, res) => res.sendFile(public/cart.html))
 app.get('/login.html', (req, res) => res.sendFile(public/login.html))
 app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }))
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), function(req, res) { res.redirect('/'); });
+app.get('/auth/google/callback', passport.authenticate('google',
+  { failureRedirect: '/login' }),
+  function(req, res) {
+    res.status(200).send({message: 'logged in'})
+    res.redirect('/');
+  });
 
 app.post('/addToCart', function(req,res){
   let json=req.bodyParser.json(),
       acct=json.account,
       chz=json.cheese
   if(db.getState() !== null){
-    if(db.get('accounts').find({user:acct}){
+    if(db.get('accounts').find({user:acct})){
       //find user from query in accounts array, update chz type to n++
-      db.get('accounts').find({user:acct}).update(chz:n => n + 1)
-      res.status(200).send({message: 'Updated ${json.account} with ${json.cheese}'});
+      db.get('accounts').find({user:acct}).update({chz:n => n + 1})
+      res.status(200).send({message: 'Updated ${json.account} with ${json.cheese}'})
     }else{
       //no user found; write user and 0 of all chesses, then update correct cheese
       db.get('accounts').push({user:acct, 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0}).write()
-      db.get('accounts').find({user:acct}).update(chz:n => n + 1)
-      res.status(200).send({message: 'Made account for ${json.account} with 1 ${json.cheese}'});
+      db.get('accounts').find({user:acct}).update({chz:n => n + 1})
+      res.status(200).send({message: 'Made account for ${json.account} with 1 ${json.cheese}'})
     }
   }
   res.status(409).send({message: 'No database existed'});
@@ -79,16 +82,5 @@ passport.deserializeUser( ( username, done ) => {
     done( null, false, { message:'user not found; session not restored' })
   }
 })
-
-// // Set some defaults (required if your JSON file is empty)
-// db.defaults(accounts: [ { user:"", ch1:0, ch2:0, ch3:0, ch4:0, ch5:0, ch6:0, ch7:0, ch8:0, total:0} ] ).write()
-// // Add a post
-// db.get('accounts').push({ id: 1, title: 'lowdb is awesome'}).write()
-// //find a post
-// db.get('accounts').find({ id: 1 }).value()
-// // Set a user using Lodash shorthand syntax
-// db.set('user.name', 'typicode').write()
-// // Increment count
-// db.update('count', n => n + 1).write()
 
 app.listen(port, () => console.log(`a3-hcaouette listening on port ${port}!`))
