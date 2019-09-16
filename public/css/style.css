@@ -87,6 +87,10 @@ nav{
   margin-bottom: 15px;
 }
 
-.m-t-5{
+.ft-mar-t-5{
   margin-top:5rem;
+}
+
+.ft-bor-t{
+  border-top: 1.5px solid var(--textMain);
 }
