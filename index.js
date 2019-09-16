@@ -42,6 +42,7 @@ const users = [
 
 //redirects
 app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
+app.get('/header.html', (req,res) => res.render('header.html'))
 app.get('/cheeses.html', (req, res) => res.sendFile(public/cheeses.html))
 app.get('/about.html', (req, res) => res.sendFile(public/about.html))
 app.get('/cart.html', (req, res) => res.sendFile(public/cart.html))
