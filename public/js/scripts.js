@@ -28,7 +28,7 @@ fetch( '/ ', {
 //     .then( console.log )
 //
 window.onload = function () {
-    fetch('/header')
+    fetch('/header', {method:'GET', credentials:'include'})
         .then((res) => {
         // .then((data) => {
           let header='',
