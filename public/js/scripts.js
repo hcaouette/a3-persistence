@@ -11,6 +11,9 @@ fetch( '/ ', {
   .then( res => res.json() )
   .then( console.log )
 */
+
+$(document).ready(function(){$( "#headerIns" ).load( "/header.html" );})
+
 const login = function(){
   const inputEmail = document.querySelector( '#inputEmail' ),
         inputPassword = document.querySelector( '#inputPassword'),
@@ -28,5 +31,5 @@ const login = function(){
 }
 
 const addToCart = function(chz){
-  
+
 }
