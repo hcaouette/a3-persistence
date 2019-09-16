@@ -27,6 +27,32 @@ fetch( '/ ', {
 //     .then( res => res.json() )
 //     .then( console.log )
 //
+window.onload = function () {
+    fetch('/header')
+        .then((res) => {
+        // .then((data) => {
+          let header='',
+          jBod = res.json()
+          console.log(jBod)
+          header+=(JSON.parse(jBod).cont)
+          console.log(header)
+
+
+            // $('.results-table tbody').remove()
+            // $('.results-table thead').css('visibility', 'visible')
+            // let tbody = $('<tbody />').appendTo($('.results-table'))
+            // for (let track of data) {
+            //     let date = new Date(track.startTime);
+            //     let timestamp = `${date.getHours()}:${date.getMinutes()}`
+            //     $('<tr>').appendTo(tbody)
+            //         .append(`<td>${track.ownedByUser ? '<span class="fas fa-trash-alt"></span>' : ''}</td>`)
+            //         .append(`<td>${track.title}</td>`)
+            //         .append(`<td>${track.artist}</td>`)
+            //         .append(`<td style="text-align:right">${timestamp}</td>`)
+            //         .append(`<td style="display: none">${track.id}</td>`)
+            // }
+        })
+}
 
 
 const addToCart = function(chz){
