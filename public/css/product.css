@@ -1,3 +1,9 @@
+:root{
+  --textMain:#153147;
+  --bgMain:#84ABBF;
+  --txtNav:32px;
+}
+
 .bg-light {
     background-color: #f8f9fa!important;
 }
@@ -12,4 +18,36 @@
 
 .ml-auto, .mx-auto {
     margin-left: auto!important;
+}
+
+.bg-primary {
+    background-color: var(--bgMain)!important;
+}
+
+.overflow-hidden {
+    overflow: hidden!important;
+}
+
+@media (min-width: 768px)
+.mr-md-3, .mx-md-3 {
+    margin-right: 1rem!important;
+}
+
+@media (min-width: 768px)
+.pt-md-5, .py-md-5 {
+    padding-top: 3rem!important;
+}
+
+@media (min-width: 768px)
+.pr-md-5, .px-md-5 {
+    padding-right: 3rem!important;
+}
+
+@media (min-width: 768px)
+.pl-md-5, .px-md-5 {
+    padding-left: 3rem!important;
+}
+
+.text-center {
+    text-align: center!important;
 }
