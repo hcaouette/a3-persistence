@@ -22,6 +22,8 @@
 
 .bg-primary {
     background-color: var(--bgMain)!important;
+    border-radius: 3px;
+    border: 1rem solid var(--textMain);
 }
 
 .overflow-hidden {
@@ -50,4 +52,16 @@
 
 .text-center {
     text-align: center!important;
+}
+
+.caption-small{
+  font-size: .75rem;
+  padding-top: 1rem;
+  border-top: 1px solid white;
+}
+
+.chz-label{
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid white;
 }
