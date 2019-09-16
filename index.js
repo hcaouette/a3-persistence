@@ -49,12 +49,14 @@ app.get('/auth/google/callback', passport.authenticate('google',
 
 
 app.post('/addToCart', function(req,res){
-  let json=req.bodyParser.json(),
-      chz=json.cheese,
-      creds=req.credentials,
-      acct = 'plimarigreece@gmail.com'
-      console.log(JSON.stringify(json))
-      console.log(JSON.stringify(creds))
+  let json=req.body,
+  chz=json.cheese,
+  creds=req.credentials,
+  acct = 'plimarigreece@gmail.com'
+  console.log('json:')
+  console.log(req.bodyParser.json())
+  console.log('creds:')
+  console.log(creds)
 
   if(db.getState() !== null){
     if(db.get('accounts').find({user:acct})){
