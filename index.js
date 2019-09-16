@@ -61,8 +61,8 @@ function profileParse(profile) {
  return {
    id: profile.id,
    name: profile.displayName,
-   image: imageUrl,
- };
+   image: imageUrl
+ }
 }
 
 app.post('/addToCart', function(req,res){
@@ -78,7 +78,9 @@ app.post('/addToCart', function(req,res){
     if(db.get('accounts').find({user:acct})){
       //find user from query in accounts array, update chz type to n++
       db.get('accounts').find({user:acct}).update({chz:n => n + 1})
-      res.status(200).send({message: 'Updated ${json.account} with ${json.cheese}'})
+      let retVal=JSON.stringify('Updated '+acct+' with '+chz)
+      console.log("returning this message: ",retVal)
+      res.status(200).send({message: retVal})
     }else{
       //no user found; write user and 0 of all chesses, then update correct cheese
       db.get('accounts').push({user:acct, 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0}).write()
@@ -86,7 +88,7 @@ app.post('/addToCart', function(req,res){
       res.status(200).send({message: 'Made account for ${json.account} with 1 ${json.cheese}'})
     }
   }
-  res.status(409).send({message: 'No database existed'});
+  res.status(409).send(/*{message: 'No database existed'}*/)
   // }else{
   //   db.defaults(accounts: [ { user:"", 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0} ] ).write()
   // }
@@ -100,17 +102,23 @@ app.get('/loadCart', (req, res) => {
     res.json(cheeses)
 })
 
-passport.serializeUser( ( user, done ) => done( null, user) )
-// "name" below refers to whatever piece of info is serialized in seralizeUser,
-// in this example we're using the username
-passport.deserializeUser( ( username, done ) => {
-  const user = users.find( u => u.username === username )
-  console.log( 'deserializing:', name )
-  if( user !== undefined ) {
-    done( null, user )
-  }else{
-    done( null, false, { message:'user not found; session not restored' })
-  }
+app.get('/loadAcct'){
+  let acct=profileParse(req.user).name
+  let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
+}
+
+passport.serializeUser( function( user, done ){
+  console.log("serializing")
+  acct = profileParse(user).name;
+  console.log("account is: ",acct)
+  db.get('accounts').push({'user':acct, 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0}).write()
+  done( null, user)
+})
+passport.deserializeUser(function(id, done) {
+  console.log("deserializing")
+  console.log("deser'd to ",id)
+  db.get('accounts').find({user:id})
+  done(null,id)
 })
 
 app.listen(port, () => console.log(`a3-hcaouette listening on port ${port}!`))

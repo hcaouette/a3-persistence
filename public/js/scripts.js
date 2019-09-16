@@ -37,3 +37,12 @@ const addToCart = function(chz){
   .then( res => res.json() )
   .then( console.log )
 }
+
+const loadAcct = function(chz){
+  fetch( '/loadAcct', {
+    method:'GET',
+    credentials: 'include',
+  })
+  .then( res => res.json() )
+  .then( console.log )
+}

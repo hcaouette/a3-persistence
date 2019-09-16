@@ -1,6 +1,6 @@
 window.onload = function () {
     fetch('/loadCart')
-        .then((res) => res.json())
+        .then((res) => console.log(res.json()))
         .then((data) => {
             $('.results-table tbody').remove()
             $('.results-table thead').css('visibility', 'visible')
