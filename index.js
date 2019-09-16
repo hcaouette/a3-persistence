@@ -48,8 +48,12 @@ app.get('/auth/google/callback', passport.authenticate('google',
 
 app.post('/addToCart', function(req,res){
   let json=req.bodyParser.json(),
-      acct=json.account,
-      chz=json.cheese
+      chz=json.cheese,
+      creds=req.credentials,
+      acct = plimarigreece@gmail.com
+      console.log(JSON.stringify(json))
+      console.log(JSON.stringify(creds))
+
   if(db.getState() !== null){
     if(db.get('accounts').find({user:acct})){
       //find user from query in accounts array, update chz type to n++
