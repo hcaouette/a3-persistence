@@ -43,6 +43,10 @@
   }
 }
 
+.pull-away-sides{
+  width: 96%!important
+}
+
 .overflow-hidden {
     overflow: hidden!important;
 }
