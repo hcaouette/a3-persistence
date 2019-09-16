@@ -48,7 +48,7 @@ app.post('/addToCart', function(req,res){
   let json=req.bodyParser.json(),
       acct=json.account,
       chz=json.cheese
-  if(db.getState() !=== null){
+  if(db.getState() !== null){
     if(db.get('accounts').find({user:acct}){
       //find user from query in accounts array, update chz type to n++
       db.get('accounts').find({user:acct}).update(chz:n => n + 1)
