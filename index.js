@@ -68,9 +68,11 @@ function profileParse(profile) {
 app.post('/addToCart', function(req,res){
   let json=req.body,
   chz=json.cheese,
-  acct = profileParse(req.user);
+  acct = profileParse(req.user).name;
+  console.log(acct)
   console.log('json:')
   console.log(req.body)
+  console.log(chz)
 
   if(db.getState() !== null){
     if(db.get('accounts').find({user:acct})){
@@ -92,7 +94,7 @@ app.post('/addToCart', function(req,res){
 
 
 app.get('/loadCart', (req, res) => {
-    let acct=profileParse(req.user)
+    let acct=profileParse(req.user).name
     let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
 
     res.json(cheeses)
