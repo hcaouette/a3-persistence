@@ -34,7 +34,7 @@ passport.initialize()
 
 //redirects
 app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
-app.get('/header', (req,res) => res.render(/public/header))
+app.get('/header', (req,res) => res.render('public/header'))
 app.get('/cheeses.html', (req, res) => res.sendFile(public/cheeses.html))
 app.get('/about.html', (req, res) => res.sendFile(public/about.html))
 app.get('/cart.html', (req, res) => res.sendFile(public/cart.html))
