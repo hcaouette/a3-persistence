@@ -29,5 +29,12 @@ const login = function(){
 }
 
 const addToCart = function(chz){
-
+  fetch( '/addToCart', {
+    method:'POST',
+    body:JSON.stringify({ account: , cheese: chz}),
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then( res => res.json() )
+  .then( console.log )
 }
