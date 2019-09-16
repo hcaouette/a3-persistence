@@ -17,7 +17,7 @@ const express   = require( 'express' ),
 app.use( express.static('public'))
 app.use( bodyParser.json())
 app.use( morgan('combined'))
-app.use( session({ secret:'fromage', name:'a3-cookie' resave:false, saveUninitialized:true }) )
+app.use( session({ secret:'fromage', name:'a3-cookie', resave:false, saveUninitialized:true }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
 passport.use(new GoogleStrategy({
@@ -46,11 +46,13 @@ app.get('/auth/google/callback', passport.authenticate('google',
     res.redirect('/');
   });
 
+
+
 app.post('/addToCart', function(req,res){
   let json=req.bodyParser.json(),
       chz=json.cheese,
       creds=req.credentials,
-      acct = plimarigreece@gmail.com
+      acct = 'plimarigreece@gmail.com'
       console.log(JSON.stringify(json))
       console.log(JSON.stringify(creds))
 
