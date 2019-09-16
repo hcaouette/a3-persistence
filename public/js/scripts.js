@@ -12,21 +12,21 @@ fetch( '/ ', {
   .then( console.log )
 */
 
-const login = function(){
-  const inputEmail = document.querySelector( '#inputEmail' ),
-        inputPassword = document.querySelector( '#inputPassword'),
-        json = { email: inputEmail.value,
-                  pass: inputPassword.value }
-  const body=JSON.stringify(json);
-
-  fetch( '/login', {
-      method:'POST',
-      body
-      headers: { 'Content-Type': 'application/json' }
-    })
-    .then( res => res.json() )
-    .then( console.log )
-}
+// const login = function(){
+//   const inputEmail = document.querySelector( '#inputEmail' ),
+//         inputPassword = document.querySelector( '#inputPassword'),
+//         json = { email: inputEmail.value,
+//                   pass: inputPassword.value }
+//   const body=JSON.stringify(json);
+//
+//   fetch( '/login', {
+//       method:'POST',
+//       body
+//       headers: { 'Content-Type': 'application/json' }
+//     })
+//     .then( res => res.json() )
+//     .then( console.log )
+//
 
 const addToCart = function(chz){
   console.log('attempting addToCart')

@@ -17,7 +17,7 @@ const express   = require( 'express' ),
 app.use( express.static('public'))
 app.use( bodyParser.json())
 app.use( morgan('combined'))
-app.use( session({ secret:'fromage', resave:false, saveUninitialized:true }) )
+app.use( session({ secret:'fromage', name:'a3-cookie' resave:false, saveUninitialized:true }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
 passport.use(new GoogleStrategy({
@@ -43,7 +43,6 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.g
 app.get('/auth/google/callback', passport.authenticate('google',
   { failureRedirect: '/login' }),
   function(req, res) {
-    res.status(200).send({message: 'logged in'})
     res.redirect('/');
   });
 
