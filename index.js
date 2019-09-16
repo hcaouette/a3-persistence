@@ -34,7 +34,7 @@ passport.initialize()
 
 //redirects
 app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
-app.get('/header', (req,res) => res.render(public/header.html))
+app.get('/header', (req,res) => res.render(public/header))
 app.get('/cheeses.html', (req, res) => res.sendFile(public/cheeses.html))
 app.get('/about.html', (req, res) => res.sendFile(public/about.html))
 app.get('/cart.html', (req, res) => res.sendFile(public/cart.html))
@@ -76,6 +76,13 @@ app.post('/addToCart', function(req,res){
   // }
 })
 
+
+app.get('/loadCart', (req, res) => {
+    let acct=req.credentials
+    let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
+
+    res.json(cheeses)
+})
 
 passport.serializeUser( ( user, done ) => done( null, user) )
 // "name" below refers to whatever piece of info is serialized in seralizeUser,
