@@ -12,7 +12,9 @@ fetch( '/ ', {
   .then( console.log )
 */
 
-$(document).ready(function(){$( "#headerIns" ).load( "/header.html" );})
+$(document).ready(function(){
+  $( "#headerIns" ).load( "/header.html" );
+})
 
 const login = function(){
   const inputEmail = document.querySelector( '#inputEmail' ),

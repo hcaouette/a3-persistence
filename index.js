@@ -1,5 +1,6 @@
 const express   = require( 'express' ),
       app       = express(),
+      morgan    = require( 'morgan' )
       session   = require( 'express-session' ),           //1
       passport  = require( 'passport' ),                  //2
       local     = require( 'passport-local' ).Strategy,
@@ -15,6 +16,7 @@ const express   = require( 'express' ),
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
+app.use(morgan('combined'))
 app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
