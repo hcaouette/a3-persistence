@@ -20,7 +20,6 @@ app.use(morgan('combined'))
 app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'))
 passport.use(new GoogleStrategy({
     clientID: '443479129403-kgnq88arlnldecfi9qp87queha2fhl7r.apps.googleusercontent.com',
     clientSecret: 'RIPOr3cA2Vwyd00UiMNoxNfK',
