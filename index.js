@@ -57,6 +57,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 // })
 //catches request to '/test' from client
 
+
 /** all authentication requests in passwords assume that your client
     is submitting a field named "username" and field named "password".
     these are both passed as arugments to the authentication strategy.*/

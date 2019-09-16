@@ -26,3 +26,7 @@ const login = function(){
     .then( res => res.json() )
     .then( console.log )
 }
+
+const addToCart = function(chz){
+  
+}
