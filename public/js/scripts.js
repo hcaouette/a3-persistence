@@ -11,17 +11,17 @@ fetch( '/ ', {
   .then( res => res.json() )
   .then( console.log )
 */
-window.onload = function () {
-  fetch('/header', {method:'GET', credentials:'include'})
-    .then((res) => {
-    // .then((data) => {
-      let header='',
-      jBod = res.json()
-      console.log(jBod)
-      header+=(JSON.parse(jBod).cont)
-      console.log(header)
-    })
-}
+// window.onload = function () {
+//   fetch('/header', {method:'GET', credentials:'include'})
+//     .then((res) => {
+//     // .then((data) => {
+//       let header='',
+//       jBod = res.json()
+//       console.log(jBod)
+//       header+=(JSON.parse(jBod).cont)
+//       console.log(header)
+//     })
+// }
 
 
 const addToCart = function(chz){
