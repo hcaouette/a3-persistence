@@ -17,7 +17,7 @@ const express   = require( 'express' ),
 app.use( express.static('public'))
 app.use( bodyParser.json())
 app.use( morgan('combined'))
-app.use( session({ secret:'cats cats cats', resave:false, saveUninitialized:false }) )
+app.use( session({ secret:'fromage', resave:false, saveUninitialized:true }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
 passport.use(new GoogleStrategy({
@@ -48,15 +48,22 @@ app.post('/addToCart', function(req,res){
   let json=req.bodyParser.json(),
       acct=json.account,
       chz=json.cheese
-
   if(db.getState() !=== null){
     if(db.get('accounts').find({user:acct}){
-      db.get('accounts').find({user:acct}).update(chz:n => n + 1)
       //find user from query in accounts array, update chz type to n++
+      db.get('accounts').find({user:acct}).update(chz:n => n + 1)
+      res.status(200).send({message: 'Updated ${json.account} with ${json.cheese}'});
+    }else{
+      //no user found; write user and 0 of all chesses, then update correct cheese
+      db.get('accounts').push({user:acct, 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0}).write()
+      db.get('accounts').find({user:acct}).update(chz:n => n + 1)
+      res.status(200).send({message: 'Made account for ${json.account} with 1 ${json.cheese}'});
     }
-  }else{
-    db.defaults(accounts: [ { user:"", 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0} ] ).write()
   }
+  res.status(409).send({message: 'No database existed'});
+  // }else{
+  //   db.defaults(accounts: [ { user:"", 'ch1':0, 'ch2':0, 'ch3':0, 'ch4':0, 'ch5':0, 'ch6':0, 'ch7':0, 'ch8':0, total:0} ] ).write()
+  // }
 })
 
 
