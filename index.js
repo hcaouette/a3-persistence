@@ -54,7 +54,7 @@ app.post('/addToCart', function(req,res){
   creds=req.credentials,
   acct = 'plimarigreece@gmail.com'
   console.log('json:')
-  console.log(req.bodyParser.json())
+  console.log(req.body)
   console.log('creds:')
   console.log(creds)
 
