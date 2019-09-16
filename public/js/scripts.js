@@ -32,7 +32,7 @@ const addToCart = function(chz){
   console.log('attempting addToCart')
   fetch( '/addToCart', {
     method:'POST',
-    body:JSON.stringify({ account: , cheese: chz}),
+    body:JSON.stringify({ cheese: chz}),
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' }
   })
