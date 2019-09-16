@@ -46,17 +46,31 @@ app.get('/auth/google/callback', passport.authenticate('google',
     res.redirect('/');
   });
 
-
+function profileParse(profile) {
+ if(!profile){
+   return {
+     id: -1,
+     name: "0",
+     image: ""
+   }
+ }
+ let imageUrl = '';
+ if (profile.photos && profile.photos.length) {
+   imageUrl = profile.photos[0].value;
+ }
+ return {
+   id: profile.id,
+   name: profile.displayName,
+   image: imageUrl,
+ };
+}
 
 app.post('/addToCart', function(req,res){
   let json=req.body,
   chz=json.cheese,
-  creds=req.credentials,
-  acct = 'plimarigreece@gmail.com'
+  acct = profileParse(req.user);
   console.log('json:')
   console.log(req.body)
-  console.log('creds:')
-  console.log(creds)
 
   if(db.getState() !== null){
     if(db.get('accounts').find({user:acct})){
@@ -78,7 +92,7 @@ app.post('/addToCart', function(req,res){
 
 
 app.get('/loadCart', (req, res) => {
-    let acct=req.credentials
+    let acct=profileParse(req.user)
     let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
 
     res.json(cheeses)

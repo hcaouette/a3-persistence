@@ -27,6 +27,7 @@ fetch( '/ ', {
 const addToCart = function(chz){
   console.log('attempting addToCart')
   let body=JSON.stringify({ cheese: chz})
+
   fetch( '/addToCart', {
     method:'POST',
     body,
