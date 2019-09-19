@@ -4,6 +4,7 @@ Assignment 3 - Persistence: Two-tier Web Application with Flat File Database, Ex
 Due: September 16th, by 11:59 AM.
 
 This project is not fully functional. Deletion/Modification isn't working, nor is data retrieval.
+Please look at my server index.js because my js should all be functional
 
 ## a3-hcaouette -- CS4241 Assignment 3
 
