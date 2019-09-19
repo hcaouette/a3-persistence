@@ -3,12 +3,11 @@ const express   = require( 'express' ),
       morgan    = require( 'morgan' )
       session   = require( 'express-session' ),           //1
       passport  = require( 'passport' ),                  //2
-      local     = require( 'passport-local' ).Strategy,
-      GoogleStrategy = require('passport-google-oauth').OAuth2Strategy; //4
+      GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
       bodyParser= require( 'body-parser' ),               //3
-      favicon   = require( 'serve-favicon' ),
+      favicon   = require( 'serve-favicon' ),             //4
       path      = require( 'path' ),
-      low       = require('lowdb'),
+      low       = require('lowdb'),                       //5
       FileSync  = require('lowdb/adapters/FileSync'),
       adapter   = new FileSync('db.json'),
       db        = low(adapter),
@@ -17,6 +16,7 @@ const express   = require( 'express' ),
 app.use( express.static('public'))
 app.use( bodyParser.json())
 app.use( morgan('combined'))
+app.use(favicon(path.join('res', 'favicon.ico')))
 app.use( session({ secret:'fromage', name:'a3-cookie', resave:false, saveUninitialized:true }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
@@ -30,7 +30,7 @@ passport.use(new GoogleStrategy({
   }
 ));
 passport.initialize()
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
 
 //redirects
 app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
