@@ -24,7 +24,9 @@ Include a very brief summary of your project here. Images are encouraged, along 
   - Lowdb for persisting data across sessions.
   - I used morgan for logging while I was developing, but I don't have it set up anymore.
 
-## Technical Achievements
+## Achievements
+
+### Technical Achievements
 - **Tech Achievement 1**: I used OAuth authentication via the Google Strategy to make for a more universal login experience
 - **Tech Achievement 2**: I made my website's template almost entirely manually, using a number of custom-styled div boxes to supplement and manipulate the underlying bootstrap framework support
 
