@@ -16,7 +16,7 @@ const express   = require( 'express' ),
 app.use( express.static('public'))
 app.use( bodyParser.json())
 app.use( morgan('combined'))
-app.use(favicon(path.join('res', 'favicon.ico')))
+app.use(favicon(path.join('public','res','favicon.ico')))
 app.use( session({ secret:'fromage', name:'a3-cookie', resave:false, saveUninitialized:true }) )
 app.use( passport.initialize() )
 app.use( passport.session() )
