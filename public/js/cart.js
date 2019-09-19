@@ -1,40 +1,73 @@
 window.onload = function () {
-    fetch('/loadCart')
-        .then((res) => console.log(res.json()))
-        .then((data) => {
-            $('.results-table tbody').remove()
-            $('.results-table thead').css('visibility', 'visible')
-            let tbody = $('<tbody />').appendTo($('.results-table'))
-            for (let track of data) {
-                let date = new Date(track.startTime);
-                let timestamp = `${date.getHours()}:${date.getMinutes()}`
-                $('<tr>').appendTo(tbody)
-                    .append(`<td>${track.ownedByUser ? '<span class="fas fa-trash-alt"></span>' : ''}</td>`)
-                    .append(`<td>${track.title}</td>`)
-                    .append(`<td>${track.artist}</td>`)
-                    .append(`<td style="text-align:right">${timestamp}</td>`)
-                    .append(`<td style="display: none">${track.id}</td>`)
-            }
-        })
-    // $(document).on('click', '.fa-trash-alt', (e) => {
-    //     let $this = e.target.parentElement.parentElement
-    //     $.post({
-    //         url: '/delete',
-    //         data: {
-    //             id: $this.children[4].innerHTML
-    //         },
-    //         credentials: 'include'
-    //     }, () => {
-    //         // $($this).find("td").fadeOut('slow', () => $(this).parent().remove())
-    //         $($this).fadeOut('slow', () => $(this).remove())
-    //     }).fail((response) => {
-    //         let message = response.responseJSON.message;
-    //         console.log(message)
-    //         let snackbar = $("#snackbar")
-    //         snackbar.html(`Could not delete song: ${message}`)
-    //         snackbar.addClass("show")
-    //         // After 3 seconds, remove the show class from DIV
-    //         setTimeout(() => snackbar.removeClass("show"), 3000);
-    //     })
-    // })
+  fetch('/loadCart')
+    .then((res) => console.log(res.json()))
+    .then((data) => {
+        $('.tbody').remove()
+        let tbody = $('<tbody />').appendTo($('.cartFill'))
+        let totP=0
+        // if(ch1 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 1</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch1}</td>`)
+          totP = `${ch1}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch2 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 2</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch2}</td>`)
+          totP = `${ch2}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch3 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 3</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch3}</td>`)
+          totP = `${ch3}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch4 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 4</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch4}</td>`)
+          totP = `${ch4}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch5 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 5</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch5}</td>`)
+          totP = `${ch5}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch6 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 6</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch6}</td>`)
+          totP = `${ch6}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch7 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 7</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch7}</td>`)
+          totP = `${ch7}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+        // if(ch8 of data != 0){
+          $('<tr>').appendTo(tbody)
+          .append('<td class="ChzName">Cheese 8</td>')
+          .append(`<td class="ChzUnitP">5</td>`)
+          .append(`<td class="ChzQuant">${ch8}</td>`)
+          totP = `${ch8}`*5
+          .append(`<td class="ChzTotP">${totP}</td></tr>`)
+        // }
+    })
 }

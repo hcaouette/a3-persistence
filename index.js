@@ -97,9 +97,9 @@ app.post('/addToCart', function(req,res){
 
 app.get('/loadCart', (req, res) => {
     let acct=profileParse(req.user).name
-    let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
-
-    res.json(cheeses)
+    let cart = db.get('accounts').find({user:acct}).deepClone().value()
+    console.log(cart)
+    res.json(cart)
 })
 
 app.get('/loadAcct', (req, res) => {

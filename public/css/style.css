@@ -94,3 +94,7 @@ nav{
 .ft-bor-t{
   border-top: 1.5px solid var(--textMain);
 }
+
+.pull-away-sides{
+  width: 96%!important;
+}
