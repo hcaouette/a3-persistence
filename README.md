@@ -26,7 +26,7 @@ Include a very brief summary of your project here. Images are encouraged, along 
 
 ## Technical Achievements
 - **Tech Achievement 1**: I used OAuth authentication via the Google Strategy to make for a more universal login experience
-- **Tech Achievement 1**: I made my website's template almost entirely manually, using a number of custom-styled div boxes to supplement and manipulate the underlying bootstrap framework support
+- **Tech Achievement 2**: I made my website's template almost entirely manually, using a number of custom-styled div boxes to supplement and manipulate the underlying bootstrap framework support
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: My website has been contrast-checked for accessibility while making my CSS template
