@@ -102,7 +102,7 @@ app.get('/loadCart', (req, res) => {
     res.json(cheeses)
 })
 
-app.get('/loadAcct'){
+app.get('/loadAcct', (req, res) => {
   let acct=profileParse(req.user).name
   let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
 }
