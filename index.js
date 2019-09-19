@@ -98,14 +98,14 @@ app.post('/addToCart', function(req,res){
 
 app.get('/loadCart', (req, res) => {
     let acct=profileParse(req.user).name
-    let cart = db.get('accounts').find({user:acct}).deepClone().value()
+    let cart = db.get('accounts').find({user:acct}).value()
     console.log(cart)
     res.json(cart)
 })
 
 app.get('/loadAcct', (req, res) => {
   let acct=profileParse(req.user).name
-  let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
+  let cheeses = db.get('accounts').find({user:acct}).value()
 })
 
 passport.serializeUser( function( user, done ){
