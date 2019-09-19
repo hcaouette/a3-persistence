@@ -78,6 +78,7 @@ app.post('/addToCart', function(req,res){
     if(db.get('accounts').find({user:acct})){
       //find user from query in accounts array, update chz type to n++
       db.get('accounts').find({user:acct}).update({chz:n => n + 1})
+      console.log(db.get('accounts'))
       let retVal=JSON.stringify('Updated '+acct+' with '+chz)
       console.log("returning this message: ",retVal)
       res.status(200).send({message: retVal})
