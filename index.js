@@ -105,7 +105,7 @@ app.get('/loadCart', (req, res) => {
 app.get('/loadAcct', (req, res) => {
   let acct=profileParse(req.user).name
   let cheeses = db.get('accounts').find({user:acct}).deepClone().value()
-}
+})
 
 passport.serializeUser( function( user, done ){
   console.log("serializing")
